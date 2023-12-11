@@ -13,8 +13,8 @@ function NavBar({ userDetails, onLogout }) {
           width="100%"
         >
           <Typography variant="h6" component="div">
-            Hello {userDetails ? userDetails.name : ""}, Welcome to Simple
-            Chinese Calendar
+            Hello {userDetails ? userDetails.name : ""}, Welcome to Simple Lunar
+            Calendar
           </Typography>
           <Button color="inherit" onClick={onLogout}>
             Logout
