@@ -4,6 +4,7 @@ import Signup from "./components/Signup";
 import Login from "./components/Login";
 import Profile from "./components/Profile";
 import PrivateRoute from "./components/PrivateRoute";
+import './firebase-messaging-sw';
 
 function App() {
   return (
