@@ -62,11 +62,6 @@ function requestPermission() {
         console.log("Message received. ", payload);
         // ...
       });
-
-      onBackgroundMessage(messaging, (payload) => {
-        console.log("Message received in the background. ", payload);
-        // ...
-      });
     } else {
       console.log("Do not have permission!");
     }
