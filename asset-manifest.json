@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/react-lunar-calendar/static/css/main.964fdded.css",
+    "main.js": "/react-lunar-calendar/static/js/main.2f9dafba.js",
+    "static/js/787.d716d8c9.chunk.js": "/react-lunar-calendar/static/js/787.d716d8c9.chunk.js",
+    "index.html": "/react-lunar-calendar/index.html",
+    "main.964fdded.css.map": "/react-lunar-calendar/static/css/main.964fdded.css.map",
+    "main.2f9dafba.js.map": "/react-lunar-calendar/static/js/main.2f9dafba.js.map",
+    "787.d716d8c9.chunk.js.map": "/react-lunar-calendar/static/js/787.d716d8c9.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.964fdded.css",
+    "static/js/main.2f9dafba.js"
+  ]
+}
