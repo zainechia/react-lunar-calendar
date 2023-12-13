@@ -10,8 +10,7 @@ export default async ({ req, res, log, error }) => {
   }
 
   if (req.method === 'POST') {
-    log('User created:', req.body);
-    return res.send('New account created!');
+    log(req.body);
 }
 
 
