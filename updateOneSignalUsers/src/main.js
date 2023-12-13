@@ -1,9 +1,8 @@
-import { Client } from 'node-appwrite';
-
+// This is your Appwrite function
 export default async ({ req, res, log, error }) => {
   // Log messages to the console
-  log('Hello, Logs!');
-  error('Hello, Errors!');
+  log('Hello, Test log!');
+  error('Hello, Test errors!');
 
   // The `req` object contains the request data
   if (req.method === 'GET') {
