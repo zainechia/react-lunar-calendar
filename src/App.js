@@ -14,11 +14,9 @@ function App() {
   //   runOneSignal();
   // }, []);
 
-  const ONE_SIGNAL_APP_ID = "c357b411-637d-4fad-a823-aaec67af5bff";
-
   useEffect(() => {
     OneSignal.init({
-      appId: ONE_SIGNAL_APP_ID,
+      appId: process.env.REACT_APP_ONE_SIGNAL_APP_ID,
     });
   }, []);
 

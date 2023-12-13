@@ -26,6 +26,7 @@ function Signup() {
   });
   const [error, setError] = useState(null); // State to manage the error
   const defaultTheme = createTheme();
+  const ONE_SIGNAL_APP_ID = process.env.REACT_APP_ONE_SIGNAL_APP_ID;
 
   //Signup
   const signupUser = async (e) => {
@@ -38,6 +39,12 @@ function Signup() {
         user.password,
         user.name
       );
+      const createdOneSignalUser = await fetch(
+        `https://onesignal.com/api/v1/apps/${ONE_SIGNAL_APP_ID}/users`,
+        { method: "POST" }
+      );
+      console.log("response ");
+      console.log(createdOneSignalUser.json());
       // console.log(response);
       navigate("/"); // Success
     } catch (error) {
