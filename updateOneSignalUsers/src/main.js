@@ -9,11 +9,17 @@ export default async ({ req, res, log, error }) => {
       return res.send('Hello, World!');
   }
 
+  if (req.method === 'POST') {
+    log('User created:', req.body);
+    return res.send('New account created!');
+}
+
+
   // Check if the event type is a user-related event
   if (req.body.event && req.body.event === 'users.create') {
-      console.log('User created:', req.body.payload.$id);
+      log('User created:', req.body.payload.$id);
   } else if (req.body.event && req.body.event === 'users.delete') {
-      console.log('User deleted:', req.body.payload.$id);
+      log('User deleted:', req.body.payload.$id);
   }
 
   // `res.json()` is a handy helper for sending JSON
