@@ -16,7 +16,7 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { Snackbar, Alert } from "@mui/material";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-
+import axios from "axios";
 function Signup() {
   const navigate = useNavigate();
   const [user, setUser] = useState({
@@ -27,6 +27,7 @@ function Signup() {
   const [error, setError] = useState(null); // State to manage the error
   const defaultTheme = createTheme();
   const ONE_SIGNAL_APP_ID = process.env.REACT_APP_ONE_SIGNAL_APP_ID;
+  const ONE_SIGNAL_REST_API_KEY = process.env.REACT_APP_ONE_SIGNAL_REST_API_KEY;
 
   //Signup
   const signupUser = async (e) => {
@@ -39,13 +40,23 @@ function Signup() {
         user.password,
         user.name
       );
-      const createdOneSignalUser = await fetch(
-        `https://onesignal.com/api/v1/apps/${ONE_SIGNAL_APP_ID}/users`,
-        { method: "POST" }
+      const createdOneSignalUser = await axios.post(
+        "https://onesignal.com/api/v1/players",
+        {
+          app_id: ONE_SIGNAL_APP_ID,
+          device_type: 5, // 1 for iOS, 2 for Android, 3 for Amazon, 4 for Windows Phone, 5 for Chrome, 6 for Chrome Web Push, 7 for Firefox, etc.
+          identifier: response.$id, // Unique identifier for the user, such as device token
+        },
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Basic ${ONE_SIGNAL_REST_API_KEY}`,
+          },
+        }
       );
       console.log("response ");
-      console.log(createdOneSignalUser.json());
-      // console.log(response);
+
+      console.log(createdOneSignalUser);
       navigate("/"); // Success
     } catch (error) {
       // console.log(error.message);
