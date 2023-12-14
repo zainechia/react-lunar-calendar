@@ -5,12 +5,17 @@ export default async ({ req, res, log, error }) => {
   error('Hello, this message is to test errors!');
 
   // The `req` object is the request sent by the client to trigger an action on the server
+
+  // If request is GET, send this response just for testing purposes
   if (req.method === 'GET') {
-      return res.send('Hello, World!');
+      return res.send('This was a GET request');
   }
 
+  // If request is POST, send this response just for testing purposes
   if (req.method === 'POST') {
-    log(req.body);
+    return res.json({
+      'sentData': req.body,
+    })
   }
   //delete one signal user function
 
@@ -22,10 +27,10 @@ export default async ({ req, res, log, error }) => {
   }
 
   // `res.json()` is a handy helper for sending JSON
-  return res.json({
-      motto: 'Build like a team of hundreds_',
-      learn: 'https://appwrite.io/docs',
-      connect: 'https://appwrite.io/discord',
-      getInspired: 'https://builtwith.appwrite.io',
-  });
+  // return res.json({
+  //     motto: 'Build like a team of hundreds_',
+  //     learn: 'https://appwrite.io/docs',
+  //     connect: 'https://appwrite.io/discord',
+  //     getInspired: 'https://builtwith.appwrite.io',
+  // });
 };
