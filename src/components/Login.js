@@ -15,6 +15,7 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { Snackbar, Alert } from "@mui/material";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
+import OneSignal from "react-onesignal";
 
 function Login() {
   const navigate = useNavigate();
@@ -28,12 +29,17 @@ function Login() {
   const loginUser = async (e) => {
     e.preventDefault();
     try {
-      // Wait for create email session function to complete
+      // Appwrite: Wait for create email session function to complete
       const session = await account.createEmailSession(
         user.email,
         user.password
       );
       localStorage.setItem("session", session.$id);
+      console.log("session", session);
+
+      // OneSignal: Login user
+      // OneSignal.login();
+
       navigate("/profile", { replace: true });
     } catch (error) {
       setError(error.message); // Set the error message in the state

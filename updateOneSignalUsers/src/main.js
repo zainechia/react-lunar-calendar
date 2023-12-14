@@ -18,6 +18,7 @@ export default async ({ req, res, log, error }) => {
       'sentData': req.body,
     })
   }
+  
   //req.body example
   const example = {
     "$id":"42cf0a0e-3e8f-402e-9ad8-2e866caf3c44",
@@ -33,7 +34,6 @@ export default async ({ req, res, log, error }) => {
     "phoneVerification":false,
     "prefs":[],
     "accessedAt":"2023-12-14T04:59:05.845+00:00"};
-
 
   //delete one signal user function
 
