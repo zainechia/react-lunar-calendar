@@ -29,6 +29,7 @@ function Signup() {
   const defaultTheme = createTheme();
   const ONE_SIGNAL_APP_ID = process.env.REACT_APP_ONE_SIGNAL_APP_ID;
   const ONE_SIGNAL_REST_API_KEY = process.env.REACT_APP_ONE_SIGNAL_REST_API_KEY;
+  const sdk = require("api")("@onesignal/v11.0#4vn013x5lq2z5kw0");
 
   //Signup
   const signupUser = async (e) => {
@@ -44,7 +45,8 @@ function Signup() {
       );
 
       // Create account in OneSignal
-      const sdk = require("api")("@onesignal/v11.0#4vn013x5lq2z5kw0");
+
+      console.log("User Appwrite ID:", response.$id);
 
       sdk
         .createUser(
