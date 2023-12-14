@@ -15,6 +15,7 @@
     "@testing-library/jest-dom": "^5.16.4",
     "@testing-library/react": "^13.3.0",
     "@testing-library/user-event": "^13.5.0",
+    "api": "^6.1.1",
     "appwrite": "^9.0.1",
     "axios": "^1.6.2",
     "dayjs": "^1.11.10",
