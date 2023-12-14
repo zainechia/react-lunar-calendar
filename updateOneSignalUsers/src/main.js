@@ -1,16 +1,16 @@
 // This is your Appwrite function
 export default async ({ req, res, log, error }) => {
-  // Log messages to the console
-  log('Hello, Test log!');
-  error('Hello, Test errors!');
+  // Log test messages to the console
+  log('Hello, this message is to test log!');
+  error('Hello, this message is to test errors!');
 
-  // The `req` object contains the request data
+  // The `req` object is the request sent by the client to trigger an action on the server
   if (req.method === 'GET') {
       return res.send('Hello, World!');
   }
 
   if (req.method === 'POST') {
-    log(req.body);
+    log(req.body.event);
   }
   //delete one signal user function
 
