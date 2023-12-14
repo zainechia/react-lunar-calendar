@@ -13,6 +13,7 @@ export default async ({ req, res, log, error }) => {
 
   // If request is POST, send this response just for testing purposes
   if (req.method === 'POST') {
+    log(req.body);
     return res.json({
       'sentData': req.body,
     })
