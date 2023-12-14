@@ -10,7 +10,7 @@ export default async ({ req, res, log, error }) => {
   }
 
   if (req.method === 'POST') {
-    log(req.body.event);
+    log(req.body);
   }
   //delete one signal user function
 
