@@ -12,6 +12,7 @@ export default async ({ req, res, log, error }) => {
   if (req.method === 'POST') {
     log(req.body);
   }
+  //delete one signal user function
 
   // Check if the event type is a user-related event
   if (req.body.event && req.body.event === 'users.create') {
