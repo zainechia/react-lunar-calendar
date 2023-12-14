@@ -13,11 +13,28 @@ export default async ({ req, res, log, error }) => {
 
   // If request is POST, send this response just for testing purposes
   if (req.method === 'POST') {
-    log(req.body);
+    log(req);
     return res.json({
       'sentData': req.body,
     })
   }
+  //req.body example
+  const example = {
+    "$id":"42cf0a0e-3e8f-402e-9ad8-2e866caf3c44",
+    "$createdAt":"2023-12-14T04:59:05.847+00:00",
+    "$updatedAt":"2023-12-14T04:59:05.847+00:00",
+    "name":"Enable17",
+    "registration":"2023-12-14T04:59:05.845+00:00",
+    "status":true,"labels":[],
+    "passwordUpdate":"2023-12-14T04:59:05.845+00:00",
+    "email":"enable17@hello.com",
+    "phone":"",
+    "emailVerification":false,
+    "phoneVerification":false,
+    "prefs":[],
+    "accessedAt":"2023-12-14T04:59:05.845+00:00"};
+
+
   //delete one signal user function
 
   // Check if the event type is a user-related event
