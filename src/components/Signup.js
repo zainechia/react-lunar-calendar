@@ -65,49 +65,50 @@ function Signup() {
       //   )
       //   .then(({ data }) => console.log(data))
       //   .catch((err) => console.error(err));
-      const options = {
-        method: "POST",
-        headers: {
-          accept: "application/json",
-          "content-type": "application/json",
-        },
-        body: JSON.stringify({
-          properties: {
-            tags: { name: response.name, email: response.email },
-            language: "en",
-            // timezone_id: 'America\/Los_Angeles',
-            // lat: 90,
-            // long: 135,
-            // country: 'US',
-            // first_active: 1678215680,
-            // last_active: 1678215682
-          },
-          identity: { external_id: response.$id },
-        }),
-      };
 
-      fetch(
-        `https://onesignal.com/api/v1/apps/${ONE_SIGNAL_APP_ID}/users`,
-        options
-      )
-        .then((response) => response.json())
-        .then((response) => console.log(response))
-        .catch((err) => console.error(err));
-
-      // const createdOneSignalUser = await axios.post(
-      //   `https://onesignal.com/api/v1/apps/${ONE_SIGNAL_APP_ID}/users`,
-      //   {
-      //     device_type: 5, // 1 for iOS, 2 for Android, 3 for Amazon, 4 for Windows Phone, 5 for Chrome, 6 for Chrome Web Push, 7 for Firefox, etc.
-      //     identifier: response.$id, // Unique identifier for the user, such as device token
-      //     external_user_id: response.$id,
+      // const options = {
+      //   method: "POST",
+      //   headers: {
+      //     accept: "application/json",
+      //     "content-type": "application/json",
       //   },
-      //   {
-      //     headers: {
-      //       "Content-Type": "application/json",
-      //       Authorization: `Basic ${ONE_SIGNAL_REST_API_KEY}`,
+      //   body: JSON.stringify({
+      //     properties: {
+      //       tags: { name: response.name, email: response.email },
+      //       language: "en",
+      //       // timezone_id: 'America\/Los_Angeles',
+      //       // lat: 90,
+      //       // long: 135,
+      //       // country: 'US',
+      //       // first_active: 1678215680,
+      //       // last_active: 1678215682
       //     },
-      //   }
-      // );
+      //     identity: { external_id: response.$id },
+      //   }),
+      // };
+
+      // fetch(
+      //   `https://onesignal.com/api/v1/apps/${ONE_SIGNAL_APP_ID}/users`,
+      //   options
+      // )
+      //   .then((response) => response.json())
+      //   .then((response) => console.log(response))
+      //   .catch((err) => console.error(err));
+
+      const createdOneSignalUser = await axios.post(
+        `https://onesignal.com/api/v1/apps/${ONE_SIGNAL_APP_ID}/users`,
+        {
+          device_type: 5, // 1 for iOS, 2 for Android, 3 for Amazon, 4 for Windows Phone, 5 for Chrome, 6 for Chrome Web Push, 7 for Firefox, etc.
+          identifier: response.$id, // Unique identifier for the user, such as device token
+          external_user_id: response.$id,
+        },
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Basic ${ONE_SIGNAL_REST_API_KEY}`,
+          },
+        }
+      );
 
       // console.log("response ");
       // console.log(createdOneSignalUser);

@@ -6,15 +6,8 @@ import Profile from "./components/Profile";
 import PrivateRoute from "./components/PrivateRoute";
 // import "./firebase-messaging-sw";
 import { useState, useEffect } from "react";
-import OneSignal from "react-onesignal";
 
 function App() {
-  useEffect(() => {
-    OneSignal.init({
-      appId: process.env.REACT_APP_ONE_SIGNAL_APP_ID,
-    });
-  }, []);
-
   return (
     <BrowserRouter>
       <Routes>

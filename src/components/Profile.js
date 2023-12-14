@@ -9,6 +9,7 @@ import { Query } from "appwrite";
 import NavBar from "./NavBar";
 import Login from "./Login";
 import { Snackbar, Alert } from "@mui/material";
+import OneSignal from "react-onesignal";
 
 function Profile() {
   const navigate = useNavigate();
@@ -18,6 +19,11 @@ function Profile() {
 
   useEffect(() => {
     getUserAndData();
+
+    // Call this from each page of your site to initialize OneSignal. This call is required before any other functions can be used.
+    OneSignal.init({
+      appId: process.env.REACT_APP_ONE_SIGNAL_APP_ID,
+    });
   }, []);
 
   const handleLogout = async () => {
