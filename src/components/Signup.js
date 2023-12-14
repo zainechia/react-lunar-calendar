@@ -49,16 +49,16 @@ function Signup() {
       sdk
         .createUser(
           {
-            // properties: {
-            //   tags: { key: "value", foo: "bar" },
-            //   language: "en",
-            //   timezone_id: "America/Los_Angeles",
-            //   lat: 90,
-            //   long: 135,
-            //   country: "US",
-            //   first_active: 1678215680,
-            //   last_active: 1678215682,
-            // },
+            properties: {
+              tags: { name: response.name, email: response.email },
+              language: "en",
+              // timezone_id: "America/Los_Angeles",
+              // lat: 90,
+              // long: 135,
+              // country: "US",
+              // first_active: 1678215680,
+              // last_active: 1678215682,
+            },
             identity: { external_id: response.$id },
           },
           { app_id: ONE_SIGNAL_APP_ID }
