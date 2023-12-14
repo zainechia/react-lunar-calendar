@@ -35,10 +35,9 @@ function Login() {
         user.password
       );
       localStorage.setItem("session", session.$id);
-      console.log("session", session);
 
-      // OneSignal: Login user
-      // OneSignal.login();
+      // OneSignal: Login user based on external Id
+      OneSignal.login(session.userId);
 
       navigate("/profile", { replace: true });
     } catch (error) {
