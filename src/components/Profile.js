@@ -1,5 +1,5 @@
 // Profile.js
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { account } from "../appwrite/appwriteConfig";
 import { useNavigate, Link } from "react-router-dom";
 import EventCalendar from "./EventCalendar";
@@ -9,12 +9,28 @@ import { Query } from "appwrite";
 import NavBar from "./NavBar";
 import Login from "./Login";
 import { Snackbar, Alert } from "@mui/material";
+import OneSignal from "react-onesignal";
 
 function Profile() {
   const navigate = useNavigate();
   const [userDetails, setUserDetails] = useState();
   const [data, setData] = useState([]);
   const [error, setError] = useState(null); // State to manage the error
+
+  const effectRan = useRef(false);
+
+  useEffect(() => {
+    if (!effectRan.current) {
+      console.log(process.env.REACT_APP_ONE_SIGNAL_APP_ID);
+      OneSignal.init({ appId: process.env.REACT_APP_ONE_SIGNAL_APP_ID }).then(
+        () => {
+          OneSignal.Slidedown.promptPush();
+        }
+      );
+    }
+
+    return () => (effectRan.current = true);
+  }, []);
 
   useEffect(() => {
     getUserAndData();

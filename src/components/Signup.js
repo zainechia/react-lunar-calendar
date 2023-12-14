@@ -27,9 +27,6 @@ function Signup() {
   });
   const [error, setError] = useState(null); // State to manage the error
   const defaultTheme = createTheme();
-  const ONE_SIGNAL_APP_ID = process.env.REACT_APP_ONE_SIGNAL_APP_ID;
-  const ONE_SIGNAL_REST_API_KEY = process.env.REACT_APP_ONE_SIGNAL_REST_API_KEY;
-  // const sdk = require("api")("@onesignal/v11.0#4vn013x5lq2z5kw0");
 
   //Signup
   const signupUser = async (e) => {
@@ -44,74 +41,35 @@ function Signup() {
         user.name
       );
 
-      // Create account in OneSignal
-
-      // sdk
-      //   .createUser(
-      //     {
-      //       properties: {
-      //         tags: { name: response.name, email: response.email },
-      //         language: "en",
-      //         // timezone_id: "America/Los_Angeles",
-      //         // lat: 90,
-      //         // long: 135,
-      //         // country: "US",
-      //         // first_active: 1678215680,
-      //         // last_active: 1678215682,
-      //       },
-      //       identity: { external_id: response.$id },
-      //     },
-      //     { app_id: ONE_SIGNAL_APP_ID }
-      //   )
-      //   .then(({ data }) => console.log(data))
-      //   .catch((err) => console.error(err));
-
-      // const options = {
-      //   method: "POST",
-      //   headers: {
-      //     accept: "application/json",
-      //     "content-type": "application/json",
-      //   },
-      //   body: JSON.stringify({
-      //     properties: {
-      //       tags: { name: response.name, email: response.email },
-      //       language: "en",
-      //       // timezone_id: 'America\/Los_Angeles',
-      //       // lat: 90,
-      //       // long: 135,
-      //       // country: 'US',
-      //       // first_active: 1678215680,
-      //       // last_active: 1678215682
-      //     },
-      //     identity: { external_id: response.$id },
-      //   }),
-      // };
-
-      // fetch(
-      //   `https://onesignal.com/api/v1/apps/${ONE_SIGNAL_APP_ID}/users`,
-      //   options
-      // )
-      //   .then((response) => response.json())
-      //   .then((response) => console.log(response))
-      //   .catch((err) => console.error(err));
-
-      const createdOneSignalUser = await axios.post(
-        `https://onesignal.com/api/v1/apps/${ONE_SIGNAL_APP_ID}/users`,
-        {
-          device_type: 5, // 1 for iOS, 2 for Android, 3 for Amazon, 4 for Windows Phone, 5 for Chrome, 6 for Chrome Web Push, 7 for Firefox, etc.
-          identifier: response.$id, // Unique identifier for the user, such as device token
-          external_user_id: response.$id,
+      // Create account in OneSignal, implemented following documentations https://documentation.onesignal.com/reference/create-user
+      const options = {
+        method: "POST",
+        headers: {
+          accept: "application/json",
+          "content-type": "application/json",
         },
-        {
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Basic ${ONE_SIGNAL_REST_API_KEY}`,
+        body: JSON.stringify({
+          properties: {
+            tags: { name: response.name, email: response.email },
+            language: "en",
+            // timezone_id: 'America\/Los_Angeles',
+            // lat: 90,
+            // long: 135,
+            // country: 'US',
+            // first_active: 1678215680,
+            // last_active: 1678215682
           },
-        }
-      );
+          identity: { external_id: response.$id },
+        }),
+      };
 
-      // console.log("response ");
-      // console.log(createdOneSignalUser);
+      fetch(
+        `https://onesignal.com/api/v1/apps/${process.env.REACT_APP_ONE_SIGNAL_APP_ID}/users`,
+        options
+      )
+        .then((response) => response.json())
+        .then((response) => console.log(response))
+        .catch((err) => console.error(err));
 
       navigate("/"); // Success
     } catch (error) {
