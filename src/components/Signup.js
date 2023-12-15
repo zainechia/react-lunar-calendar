@@ -41,35 +41,35 @@ function Signup() {
         user.name
       );
 
-      // Create account in OneSignal, implemented following documentations https://documentation.onesignal.com/reference/create-user
-      const options = {
-        method: "POST",
-        headers: {
-          accept: "application/json",
-          "content-type": "application/json",
-        },
-        body: JSON.stringify({
-          properties: {
-            tags: { name: response.name, email: response.email },
-            language: "en",
-            // timezone_id: 'America\/Los_Angeles',
-            // lat: 90,
-            // long: 135,
-            // country: 'US',
-            // first_active: 1678215680,
-            // last_active: 1678215682
-          },
-          identity: { external_id: response.$id },
-        }),
-      };
+      // // Create account in OneSignal, implemented following documentations https://documentation.onesignal.com/reference/create-user
+      // const options = {
+      //   method: "POST",
+      //   headers: {
+      //     accept: "application/json",
+      //     "content-type": "application/json",
+      //   },
+      //   body: JSON.stringify({
+      //     properties: {
+      //       tags: { name: response.name, email: response.email },
+      //       language: "en",
+      //       // timezone_id: 'America\/Los_Angeles',
+      //       // lat: 90,
+      //       // long: 135,
+      //       // country: 'US',
+      //       // first_active: 1678215680,
+      //       // last_active: 1678215682
+      //     },
+      //     identity: { external_id: response.$id },
+      //   }),
+      // };
 
-      fetch(
-        `https://onesignal.com/api/v1/apps/${process.env.REACT_APP_ONE_SIGNAL_APP_ID}/users`,
-        options
-      )
-        .then((response) => response.json())
-        .then((response) => console.log(response))
-        .catch((err) => console.error(err));
+      // fetch(
+      //   `https://onesignal.com/api/v1/apps/${process.env.REACT_APP_ONE_SIGNAL_APP_ID}/users`,
+      //   options
+      // )
+      //   .then((response) => response.json())
+      //   .then((response) => console.log(response))
+      //   .catch((err) => console.error(err));
 
       navigate("/"); // Success
     } catch (error) {

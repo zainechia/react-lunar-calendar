@@ -37,9 +37,9 @@ function Login() {
       localStorage.setItem("session", session.$id);
 
       // OneSignal: Login user based on external (Appwrite) Id
-      OneSignal.login(session.userId)
-        .then((response) => console.log(response))
-        .catch((error) => console.log(error));
+      // OneSignal.login(session.userId)
+      //   .then((response) => console.log(response))
+      //   .catch((error) => console.log(error));
 
       navigate("/profile", { replace: true });
     } catch (error) {

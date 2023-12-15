@@ -4,8 +4,8 @@ import Signup from "./components/Signup";
 import Login from "./components/Login";
 import Profile from "./components/Profile";
 import PrivateRoute from "./components/PrivateRoute";
-// import "./firebase-messaging-sw";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
+import OneSignal from "react-onesignal";
 
 function App() {
   return (
