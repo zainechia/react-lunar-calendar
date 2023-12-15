@@ -3,19 +3,12 @@ import React, { useState, useEffect, useRef } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import EventCalendar from "./EventCalendar";
 import { Stack } from "@mui/material";
-import {
-  databases,
-  account,
-  COLLECTION_ID,
-  DATABASE_ID,
-} from "../appwrite/appwriteConfig";
+import { databases, account, COLLECTION_ID } from "../appwrite/appwriteConfig";
 import { Query } from "appwrite";
 import NavBar from "./NavBar";
 import Login from "./Login";
 import { Snackbar, Alert } from "@mui/material";
 import OneSignal from "react-onesignal";
-
-// Check for events happening within the next hour in Appwrite
 
 function Profile() {
   const navigate = useNavigate();
@@ -34,26 +27,7 @@ function Profile() {
         }
       );
     }
-    try {
-      // Use the helper function to check events within the next hour
-      const eventsWithinNextHour = checkEventsWithinNextHour(
-        databases,
-        DATABASE_ID,
-        COLLECTION_ID
-      );
-
-      // Do something with eventsWithinNextHour
-      // Iterate over eventsWithinNextHour
-      // Find userID for that event
-      // Use sendOneSignalNotification helper function to notify userID - create notification using filters for userID data tag
-      // Keep count of number of times notification sent, make sure only send once
-      // Cronjob Appwrite function will run every minute
-
-      console.log("Events within the next hour:", eventsWithinNextHour);
-    } catch (error) {
-      error("Error checking events within the next hour:", error.message);
-    }
-
+    
     return () => (effectRan.current = true);
   }, []);
 
