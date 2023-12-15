@@ -1,4 +1,3 @@
-// checkEventsHelperFunction.js
 import { Query } from "appwrite";
 
 const checkEventsWithinNextHour = async (databases, databaseId, collectionId) => {

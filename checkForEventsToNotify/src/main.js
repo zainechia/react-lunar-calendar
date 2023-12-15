@@ -5,6 +5,7 @@ import {
     COLLECTION_ID,
   } from "../../src/appwrite/appwriteConfig";
 
+  
 // This is your Appwrite function
 export default async ({ req, res, log, error }) => {
   // Log test messages to the console
