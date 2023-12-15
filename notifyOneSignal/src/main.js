@@ -2,7 +2,7 @@ import { Query, Client, Databases } from 'node-appwrite';
 // import { checkEventsWithinNextHour } from './helperFunctions';
 
 // Check for events happening within the next hour in Appwrite
-const checkEventsWithinNextHour = async (databases, databaseId, collectionId) => {
+const checkEventsWithinNextHour = async (log, databases, databaseId, collectionId) => {
   try {
     // Get the current time
     const currentTime = new Date();
@@ -15,8 +15,12 @@ const checkEventsWithinNextHour = async (databases, databaseId, collectionId) =>
       Query.greaterThan("startTime", currentTime.toISOString()), // Events starting after the current time
       Query.lessThan("startTime", nextHour.toISOString()), // Events starting before the next hour
     ];
+    log("currentTime", currentTime.toISOString());
+    log("nextHour", nextHour.toISOString());
+    log("query", query);
 
-    const { documents } = await databases.listDocuments(databaseId, collectionId, query);
+    const documents = await databases.listDocuments(databaseId, collectionId, query);
+    log("documents", documents)
     return documents;
   } catch (error) {
     throw error;
@@ -27,7 +31,7 @@ const checkEventsWithinNextHour = async (databases, databaseId, collectionId) =>
 // It's executed each time we get a request
 export default async ({ req, res, log, error }) => {
   // Why not try the Appwrite SDK?
-  //
+  
   const client = new Client()
      .setEndpoint('https://cloud.appwrite.io/v1')
      .setProject(process.env.APPWRITE_FUNCTION_PROJECT_ID)
@@ -45,6 +49,7 @@ export default async ({ req, res, log, error }) => {
   try {
     // Use the helper function to check events within the next hour
     const eventsWithinNextHour = await checkEventsWithinNextHour(
+      log,
       databases,
       DATABASE_ID,
       COLLECTION_ID
