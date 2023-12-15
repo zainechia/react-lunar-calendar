@@ -27,39 +27,9 @@ function Profile() {
         }
       );
     }
-    
+
     return () => (effectRan.current = true);
   }, []);
-
-  const checkEventsWithinNextHour = async (
-    databases,
-    databaseId,
-    collectionId
-  ) => {
-    try {
-      // Get the current time
-      const currentTime = new Date();
-
-      // Calculate the time one hour from now
-      const nextHour = new Date(currentTime.getTime() + 60 * 60 * 1000);
-
-      // Query for events starting within the next hour
-      const query = [
-        Query.greater("startTime", currentTime.toISOString()), // Events starting after the current time
-        Query.lesser("startTime", nextHour.toISOString()), // Events starting before the next hour
-      ];
-      console.log(OneSignal.Client);
-      console.log("currentTime", currentTime.toISOString());
-      console.log("nextHour", nextHour.toISOString());
-      console.log("query", query);
-
-      const documents = await databases.listDocuments(collectionId, query);
-      console.log("documents", documents);
-      return documents;
-    } catch (error) {
-      throw error;
-    }
-  };
 
   const handleLogout = async () => {
     try {
