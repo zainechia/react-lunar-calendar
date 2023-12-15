@@ -3,7 +3,7 @@ import * as OneSignal from 'onesignal-node';
 
 // import { checkEventsWithinNextHour } from './helperFunctions';
 
-// Check for events happening within the next hour in Appwrite
+// Helper function: Check for events happening within the next hour in Appwrite
 const checkEventsWithinNextHour = async (log, databases, databaseId, collectionId) => {
   try {
     // Get the current time
@@ -12,11 +12,10 @@ const checkEventsWithinNextHour = async (log, databases, databaseId, collectionI
     // Calculate the time one hour from now
     const nextHour = new Date(currentTime.getTime() + 60 * 60 * 1000);
 
-
     // Query for events starting within the next hour
     const query = [
-      Query.greaterThan("startTime", currentTime.toISOString()), // Events starting after the current time
-      Query.lessThan("startTime", nextHour.toISOString()), // Events starting before the next hour
+      Query.greaterThanEqual("startTime", currentTime.toISOString()), // Events starting after the current time
+      Query.lessThanEqual("startTime", nextHour.toISOString()), // Events starting before the next hour
     ];
     // log(OneSignal.Client)
     log("currentTime", currentTime.toISOString());
