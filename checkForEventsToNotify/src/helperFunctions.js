@@ -23,7 +23,6 @@ const checkEventsWithinNextHour = async (databases, databaseId, collectionId) =>
   }
 };
 
-export { checkEventsWithinNextHour };
 
 // Send One Signal notification
 const sendOneSignalNotification = async (client, app, userId, notificationContent) => {
@@ -44,4 +43,4 @@ const sendOneSignalNotification = async (client, app, userId, notificationConten
   }
 };
 
-export { sendOneSignalNotification };
+export { sendOneSignalNotification,checkEventsWithinNextHour };
