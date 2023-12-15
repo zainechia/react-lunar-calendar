@@ -1,5 +1,6 @@
 import { Query, Client, Databases } from 'node-appwrite';
-import { Client } from 'onesignal-node';
+import * as OneSignal from 'onesignal-node';
+
 // import { checkEventsWithinNextHour } from './helperFunctions';
 
 // Check for events happening within the next hour in Appwrite
@@ -17,7 +18,7 @@ const checkEventsWithinNextHour = async (log, databases, databaseId, collectionI
       Query.greaterThan("startTime", currentTime.toISOString()), // Events starting after the current time
       Query.lessThan("startTime", nextHour.toISOString()), // Events starting before the next hour
     ];
-    log(Client)
+    log(OneSignal.Client)
     log("currentTime", currentTime.toISOString());
     log("nextHour", nextHour.toISOString());
     log("query", query);
