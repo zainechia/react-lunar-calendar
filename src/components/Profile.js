@@ -1,10 +1,9 @@
 // Profile.js
 import React, { useState, useEffect, useRef } from "react";
-import { account } from "../appwrite/appwriteConfig";
 import { useNavigate, Link } from "react-router-dom";
 import EventCalendar from "./EventCalendar";
 import { Stack } from "@mui/material";
-import { databases, COLLECTION_ID } from "../appwrite/appwriteConfig";
+import { databases, account, COLLECTION_ID } from "../appwrite/appwriteConfig";
 import { Query } from "appwrite";
 import NavBar from "./NavBar";
 import Login from "./Login";
@@ -28,10 +27,9 @@ function Profile() {
         }
       );
     }
+    
     return () => (effectRan.current = true);
   }, []);
-
-  console.log("userDetails", userDetails);
 
   const handleLogout = async () => {
     try {
@@ -57,6 +55,9 @@ function Profile() {
 
       // OneSignal
       setOneSignalExternalUserId(user);
+      sendTags(user);
+
+      console.log("user", user);
     } catch (error) {
       setError(error.message); // Failure: Set the error message in the state
     }
@@ -66,21 +67,17 @@ function Profile() {
     setError(null); // Clear the error state when the alert is closed
   };
 
-  const sendTags = () => {
-    OneSignal.sendTag("user_id", userDetails.$id)
-      .then(() => {
-        console.log("Sent user_id: " + userDetails.$id);
-      })
-      .catch((error) => {
-        console.log("errror", error);
-      });
+  const sendTags = (user) => {
+    OneSignal.sendTag("name", user.name);
+    OneSignal.sendTag("email", user.email);
+    OneSignal.sendTag("user_id", user.$id);
   };
 
   // Set OneSignal external user ID upon successful OneSignal init
   const setOneSignalExternalUserId = (user) => {
     OneSignal.setExternalUserId(user.$id)
       .then(() => {
-        console.log("Sent external user_id: " + user.$id);
+        console.log("Set external user_id: " + user.$id);
       })
       .catch((error) => {
         console.log("errror", error);
