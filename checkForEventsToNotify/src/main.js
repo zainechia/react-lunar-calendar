@@ -4,28 +4,7 @@ import {
     COLLECTION_ID,
   } from "../../src/appwrite/appwriteConfig";
 import { Query } from "appwrite";
-
-  // Check for events happening within the next hour in Appwrite
-  const checkEventsWithinNextHour = async (databases, databaseId, collectionId) => {
-    try {
-      // Get the current time
-      const currentTime = new Date();
-  
-      // Calculate the time one hour from now
-      const nextHour = new Date(currentTime.getTime() + 60 * 60 * 1000);
-  
-      // Query for events starting within the next hour
-      const query = [
-        Query.greaterThan("startTime", currentTime.toISOString()), // Events starting after the current time
-        Query.lessThan("startTime", nextHour.toISOString()), // Events starting before the next hour
-      ];
-  
-      const { documents } = await databases.listDocuments(databaseId, collectionId, query);
-      return documents;
-    } catch (error) {
-      throw error;
-    }
-  };
+import { Client,Databases } from 'node-appwrite';
   
 // This is your main Appwrite function
 export default async ({ req, res, log, error }) => {
@@ -34,11 +13,15 @@ export default async ({ req, res, log, error }) => {
   error('Hello, this message is to test error!');
 
   // The `req` object is the request sent by the client to trigger an action on the server
-
   // If request is GET, send this response just for testing purposes
   if (req.method === 'GET') {
       return res.send('This was a GET request');
   }
+
+  const client = new Client()
+     .setEndpoint('https://cloud.appwrite.io/v1')
+     .setProject(process.env.APPWRITE_FUNCTION_PROJECT_ID)
+     .setKey(process.env.APPWRITE_API_KEY);
 
   try {
     // Use the helper function to check events within the next hour
