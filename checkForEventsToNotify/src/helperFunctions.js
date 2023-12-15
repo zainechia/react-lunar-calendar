@@ -1,5 +1,7 @@
+// helperFunctions.js
 import { Query } from "appwrite";
 
+// Check for events happening within the next hour in Appwrite
 const checkEventsWithinNextHour = async (databases, databaseId, collectionId) => {
   try {
     // Get the current time
@@ -22,3 +24,24 @@ const checkEventsWithinNextHour = async (databases, databaseId, collectionId) =>
 };
 
 export { checkEventsWithinNextHour };
+
+// Send One Signal notification
+const sendOneSignalNotification = async (client, app, userId, notificationContent) => {
+  try {
+    const notification = new OneSignal.Notification();
+    notification.app_id = app.id;
+    // Name property may be required in some cases, for instance when sending an SMS.
+    notification.name = "test_notification_name";
+    notification.contents = notificationContent;
+
+    // You may want to customize this based on your needs
+    notification.include_player_ids = [userId];
+
+    const result = await client.createNotification(notification);
+    return result;
+  } catch (error) {
+    throw error;
+  }
+};
+
+export { sendOneSignalNotification };

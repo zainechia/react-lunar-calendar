@@ -1,4 +1,4 @@
-import checkEventsWithinNextHour from "./helperFunctions";
+import { checkEventsWithinNextHour, sendOneSignalNotification } from "./helperFunctions";
 import {
     databases,
     DATABASE_ID,
@@ -6,7 +6,7 @@ import {
   } from "../../src/appwrite/appwriteConfig";
 
   
-// This is your Appwrite function
+// This is your main Appwrite function
 export default async ({ req, res, log, error }) => {
   // Log test messages to the console
   log('Hello, this message is to test log!');
