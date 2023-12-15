@@ -15,8 +15,8 @@ const checkEventsWithinNextHour = async (databases, databaseId, collectionId) =>
       Query.lessThan("startTime", nextHour.toISOString()), // Events starting before the next hour
     ];
 
-    const response = await databases.listDocuments(databaseId, collectionId, query);
-    return response;
+    const { documents } = await databases.listDocuments(databaseId, collectionId, query);
+    return documents;
   } catch (error) {
     throw error;
   }
