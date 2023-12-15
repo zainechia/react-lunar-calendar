@@ -1,4 +1,5 @@
 import { Query, Client, Databases } from 'node-appwrite';
+import { Client } from 'onesignal-node';
 // import { checkEventsWithinNextHour } from './helperFunctions';
 
 // Check for events happening within the next hour in Appwrite
@@ -10,11 +11,13 @@ const checkEventsWithinNextHour = async (log, databases, databaseId, collectionI
     // Calculate the time one hour from now
     const nextHour = new Date(currentTime.getTime() + 60 * 60 * 1000);
 
+
     // Query for events starting within the next hour
     const query = [
       Query.greaterThan("startTime", currentTime.toISOString()), // Events starting after the current time
       Query.lessThan("startTime", nextHour.toISOString()), // Events starting before the next hour
     ];
+    log(Client)
     log("currentTime", currentTime.toISOString());
     log("nextHour", nextHour.toISOString());
     log("query", query);
@@ -56,6 +59,12 @@ export default async ({ req, res, log, error }) => {
     );
 
     // Do something with eventsWithinNextHour
+    // Iterate over eventsWithinNextHour
+    // Find userID for that event
+    // Use sendOneSignalNotification helper function to notify userID - create notification using filters for userID data tag
+    // Keep count of number of times notification sent, make sure only send once
+    // Cronjob Appwrite function will run every minute
+
     log("Events within the next hour:", eventsWithinNextHour);
   } catch (error) {
     error("Error checking events within the next hour:", error.message);
