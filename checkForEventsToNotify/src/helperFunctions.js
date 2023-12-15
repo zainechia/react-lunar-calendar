@@ -21,4 +21,4 @@ const checkEventsWithinNextHour = async (databases, databaseId, collectionId) =>
   }
 };
 
-export default checkEventsWithinNextHour;
+export { checkEventsWithinNextHour };
