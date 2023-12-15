@@ -1,5 +1,27 @@
-import { Client, Databases } from 'node-appwrite';
-import { checkEventsWithinNextHour } from './helperFunctions';
+import { Query, Client, Databases } from 'node-appwrite';
+// import { checkEventsWithinNextHour } from './helperFunctions';
+
+// Check for events happening within the next hour in Appwrite
+const checkEventsWithinNextHour = async (databases, databaseId, collectionId) => {
+  try {
+    // Get the current time
+    const currentTime = new Date();
+
+    // Calculate the time one hour from now
+    const nextHour = new Date(currentTime.getTime() + 60 * 60 * 1000);
+
+    // Query for events starting within the next hour
+    const query = [
+      Query.greaterThan("startTime", currentTime.toISOString()), // Events starting after the current time
+      Query.lessThan("startTime", nextHour.toISOString()), // Events starting before the next hour
+    ];
+
+    const { documents } = await databases.listDocuments(databaseId, collectionId, query);
+    return documents;
+  } catch (error) {
+    throw error;
+  }
+};
 
 // This is your Appwrite function
 // It's executed each time we get a request
