@@ -31,6 +31,7 @@ function Profile() {
     return () => (effectRan.current = true);
   }, []);
 
+  // Handle logout by deleting Appwrite session and navigating to login page
   const handleLogout = async () => {
     try {
       await account.deleteSession("current");
@@ -63,10 +64,12 @@ function Profile() {
     }
   };
 
+  // Handle closing alert by clearing error state
   const handleCloseAlert = () => {
-    setError(null); // Clear the error state when the alert is closed
+    setError(null);
   };
 
+  // Send tags to OneSignal which will be used for filtering for user to send notification
   const sendTags = (user) => {
     OneSignal.sendTag("name", user.name);
     OneSignal.sendTag("email", user.email);
