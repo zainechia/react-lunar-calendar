@@ -18,9 +18,9 @@ const checkEventsWithinNextHour = async (log, database, databaseId, collectionId
       Query.lessThanEqual("startTime", nextHour.toISOString()), // Events starting before the next hour
     ];
     // log(OneSignal.Client)
-    log("currentTime", currentTime.toISOString());
-    log("nextHour", nextHour.toISOString());
-    log("query", query);
+    log( currentTime.toISOString());
+    log(nextHour.toISOString());
+    log( query);
 
     const documents = await database.listDocuments(databaseId, collectionId, query);
     log("documents", documents)
