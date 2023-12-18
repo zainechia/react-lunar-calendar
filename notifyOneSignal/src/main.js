@@ -1,5 +1,5 @@
 import { Query, Client, Databases } from 'node-appwrite';
-import * as OneSignal from 'onesignal-node';
+import * as OneSignal from '@onesignal/node-onesignal';
 
 // Helper function: Check for events happening within the next hour in Appwrite
 const checkEventsWithinNextHour = async (log, database, databaseId, collectionId) => {
@@ -15,14 +15,9 @@ const checkEventsWithinNextHour = async (log, database, databaseId, collectionId
       Query.greaterThanEqual("startTime", currentTime.toISOString()), // Events starting after the current time
       Query.lessThanEqual("startTime", nextHour.toISOString()), // Events starting before the next hour
     ];
-    // log(OneSignal.Client)
-    // log( currentTime.toISOString());
-    // log(nextHour.toISOString()+'');
-    // log( query);
 
     const documents = await database.listDocuments(databaseId, collectionId, query);
-  //  log("documents");
-  //   log( documents)
+
     return documents;
   } catch (error) {
     throw error;
@@ -30,17 +25,18 @@ const checkEventsWithinNextHour = async (log, database, databaseId, collectionId
 };
 
 // Send One Signal notification
-const sendOneSignalNotification = async (oneSignalClient, app, userId, notificationContent) => {
+const sendOneSignalNotification = async (oneSignalClient, appId, notificationContent) => {
   try {
     const notification = new OneSignal.Notification();
-    notification.app_id = app.id;
+    notification.app_id = appId;
     // Name property may be required in some cases, for instance when sending an SMS.
     notification.name = "test_notification_name";
     notification.contents = notificationContent;
 
     // You may want to customize this based on your needs
-    notification.include_player_ids = [userId];
+    // notification.include_player_ids = [userId];
 
+    log('Sending OneSignal notification...');
     const result = await oneSignalClient.createNotification(notification);
     return result;
   } catch (error) {
@@ -51,21 +47,33 @@ const sendOneSignalNotification = async (oneSignalClient, app, userId, notificat
 // This is your Appwrite function
 // It's executed each time we get a request
 export default async ({ req, res, log, error }) => {
-  // Why not try the Appwrite SDK?
+  // Appwrite constants
+  const DATABASE_ID = "656fd0d5e096d5c69451";
+  const COLLECTION_ID = "656fd11d07243c7e0ea1";
   
-  const client = new Client()
+  // OneSignal constants
+  const ONE_SIGNAL_APP_ID = "8c92528a-fc7e-4083-b4c9-2b5c21c1b2d8";
+  const ONE_SIGNAL_REST_API_KEY = "YzUwNTBkMmUtMDM4YS00M2I5LWI1YzEtMWY1ZjcxOGMwZTAw";
+  const ONE_SIGNAL_USER_KEY = "YzNhYTIzMjgtMTE3Yy00ZGU3LWJlOWEtZjEwNzEyNjVjNThi";
+
+  // Initialize Appwrite client and database
+  const appwriteClient = new Client()
      .setEndpoint('https://cloud.appwrite.io/v1')
      .setProject(process.env.APPWRITE_FUNCTION_PROJECT_ID)
      .setKey(process.env.APPWRITE_API_KEY);
-  
-  const DATABASE_ID = "656fd0d5e096d5c69451";
-  const COLLECTION_ID = "656fd11d07243c7e0ea1";
-  const database = new Databases(client);
+  const database = new Databases(appwriteClient);
 
-  // log("PROJECT_ID", process.env.APPWRITE_FUNCTION_PROJECT_ID);
-  // log("APPWRITE_API_KEY", process.env.APPWRITE_API_KEY);
-  // log("DATABASE_ID", DATABASE_ID);
-  // log("COLLECTION_ID", COLLECTION_ID);
+  // Initialize OneSignal client
+  const OneSignal = require('@onesignal/node-onesignal');
+  const configuration = OneSignal.createConfiguration({
+    userKey: ONE_SIGNAL_USER_KEY,
+    appKey: ONE_SIGNAL_APP_ID,
+  });
+  const oneSignalClient = new OneSignal.DefaultApi(configuration);
+
+  let notificationContent = "Hello World!";
+
+  sendOneSignalNotification(oneSignalClient, ONE_SIGNAL_APP_ID, notificationContent);
 
   // You can log messages to the console
   log('Hello, Logs!');
@@ -82,6 +90,9 @@ export default async ({ req, res, log, error }) => {
       COLLECTION_ID
     );
 
+    log("Events within the next hour:");
+    log(eventsWithinNextHour);
+    
     // Do something with eventsWithinNextHour
     // Iterate over eventsWithinNextHour
     // Find userID for that event
@@ -89,8 +100,7 @@ export default async ({ req, res, log, error }) => {
     // Keep count of number of times notification sent, make sure only send once
     // Cronjob Appwrite function will run every minute
 
-    log("Events within the next hour:");
-    log(eventsWithinNextHour);
+
   } catch (error) {
     error("Error checking events within the next hour:", error.message);
   }
