@@ -2,12 +2,7 @@ import { Query, Client, Databases } from "node-appwrite";
 import * as OneSignal from "@onesignal/node-onesignal";
 
 // Helper function: Check for events happening within the next hour in Appwrite
-const getEventsWithinNextHour = async (
-  error,
-  database,
-  databaseId,
-  collectionId
-) => {
+const getEventsWithinNextHour = async (database, databaseId, collectionId) => {
   try {
     // Get the current time
     const currentTime = new Date();
@@ -29,14 +24,12 @@ const getEventsWithinNextHour = async (
 
     return documents;
   } catch (err) {
-    error("Error getting events happening within an hour:", err.message);
     throw err;
   }
 };
 
 // Send One Signal notification
 const sendOneSignalNotification = async (
-  error,
   oneSignalClient,
   oneSignalAppId,
   notificationContent
@@ -56,7 +49,6 @@ const sendOneSignalNotification = async (
     log("OneSignal notification sent successfully:", result);
     return result;
   } catch (err) {
-    error("Error sending OneSignal notification:", err.message);
     throw err;
   }
 };
@@ -106,7 +98,6 @@ export default async ({ req, res, log, error }) => {
   try {
     // Use the helper function to check events within the next hour
     const eventsWithinNextHour = await getEventsWithinNextHour(
-      error,
       database,
       DATABASE_ID,
       COLLECTION_ID
