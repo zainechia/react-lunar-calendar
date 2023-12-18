@@ -155,8 +155,7 @@ export default async ({ req, res, log, error }) => {
     // Iterate over each event
     for (const event of eventsWithinNextHour.documents) {
       const userId = event.userId;
-      log("userId: ");
-      log(userId);
+      log(`Processing event for userId: ${userId}`);
 
       // Customize notification content based on specific event details if needed
       const notificationContent = `Event: ${event.title} is starting in an hour!`;
