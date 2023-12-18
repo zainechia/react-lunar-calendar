@@ -20,6 +20,7 @@ function NewEventDialog({ addNewEvent, dayInfo, onClose, ...rest }) {
   const [content, setContent] = useState("");
   const [startTime, setStartTime] = useState(null);
   const [endTime, setEndTime] = useState(null);
+  const [hasNotified, setHasNotified] = useState(false);
   const [error, setError] = useState("");
 
   function handleSelectStartTime(newStartTime) {
@@ -37,6 +38,7 @@ function NewEventDialog({ addNewEvent, dayInfo, onClose, ...rest }) {
     setStartTime(null);
     setEndTime(null);
     setError("");
+    setHasNotified(false);
   }
 
   function handleSubmit(event) {
@@ -47,7 +49,7 @@ function NewEventDialog({ addNewEvent, dayInfo, onClose, ...rest }) {
       return;
     }
 
-    addNewEvent(title, content, dayInfo.date, startTime, endTime);
+    addNewEvent(title, content, dayInfo.date, startTime, endTime, hasNotified);
 
     onClose({}, "Some Reason");
 

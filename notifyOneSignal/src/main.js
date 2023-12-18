@@ -90,13 +90,13 @@ export default async ({ req, res, log, error }) => {
   // Create notification content
   let notificationContent = "Hello World!";
 
-  // Send notification to all users
-  sendOneSignalNotification(
-    log,
-    oneSignalClient,
-    ONE_SIGNAL_APP_ID,
-    notificationContent
-  );
+  // Send test notification to all users
+  // sendOneSignalNotification(
+  //   log,
+  //   oneSignalClient,
+  //   ONE_SIGNAL_APP_ID,
+  //   notificationContent
+  // );
 
   // You can log messages to the console
   log("Hello, Logs!");
