@@ -4,7 +4,7 @@ import * as OneSignal from 'onesignal-node';
 // import { checkEventsWithinNextHour } from './helperFunctions';
 
 // Helper function: Check for events happening within the next hour in Appwrite
-const checkEventsWithinNextHour = async (log, databases, databaseId, collectionId) => {
+const checkEventsWithinNextHour = async (log, database, databaseId, collectionId) => {
   try {
     // Get the current time
     const currentTime = new Date();
@@ -22,7 +22,7 @@ const checkEventsWithinNextHour = async (log, databases, databaseId, collectionI
     log("nextHour", nextHour.toISOString());
     log("query", query);
 
-    const documents = await databases.listDocuments(databaseId, collectionId, query);
+    const documents = await database.listDocuments(databaseId, collectionId, query);
     log("documents", documents)
     return documents;
   } catch (error) {
@@ -39,13 +39,13 @@ export default async ({ req, res, log, error }) => {
      .setEndpoint('https://cloud.appwrite.io/v1')
      .setProject(process.env.APPWRITE_FUNCTION_PROJECT_ID)
      .setKey(process.env.APPWRITE_API_KEY);
-
-  log("PROJECT_ID", process.env.APPWRITE_FUNCTION_PROJECT_ID);
-  log("APPWRITE_API_KEY", process.env.APPWRITE_API_KEY);
   
   const DATABASE_ID = "656fd0d5e096d5c69451";
   const COLLECTION_ID = "656fd11d07243c7e0ea1";
-  const databases = new Databases(client, DATABASE_ID);
+  const database = new Databases(client);
+
+  log("PROJECT_ID", process.env.APPWRITE_FUNCTION_PROJECT_ID);
+  log("APPWRITE_API_KEY", process.env.APPWRITE_API_KEY);
 
   // You can log messages to the console
   log('Hello, Logs!');
@@ -57,7 +57,7 @@ export default async ({ req, res, log, error }) => {
     // Use the helper function to check events within the next hour
     const eventsWithinNextHour = await checkEventsWithinNextHour(
       log,
-      databases,
+      database,
       DATABASE_ID,
       COLLECTION_ID
     );
