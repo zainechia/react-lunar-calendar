@@ -24,7 +24,6 @@ function Event({ event, index, onDelete }) {
         sx={{
           padding: "1rem",
           overflowY: "auto", // Enable vertical scrolling if needed
-          // width: "100vw",
         }}
       >
         <Typography variant="h6">
