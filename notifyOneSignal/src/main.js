@@ -72,8 +72,6 @@ export default async ({ req, res, log, error }) => {
     "ZjJhOWIxNzQtMjE1Zi00ZTYxLTkyZDgtMTZlZDk4MDgxZGRl";
   const ONE_SIGNAL_USER_KEY =
     "YzNhYTIzMjgtMTE3Yy00ZGU3LWJlOWEtZjEwNzEyNjVjNThi";
-  // const ONE_SIGNAL_USER_KEY =
-  // "YzNhYTIzMjgtMTE3Yy00ZGU3LWJlOWEtZjEwNzEyNjVjNThi";
 
   // Initialize Appwrite client and database
   const appwriteClient = new Client()
