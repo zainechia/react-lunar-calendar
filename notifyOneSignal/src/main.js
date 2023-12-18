@@ -19,7 +19,7 @@ const checkEventsWithinNextHour = async (log, database, databaseId, collectionId
     ];
     // log(OneSignal.Client)
     log( currentTime.toISOString());
-    log(nextHour.toISOString());
+    log(nextHour.toISOString()+'');
     log( query);
 
     const documents = await database.listDocuments(databaseId, collectionId, query);
@@ -71,7 +71,8 @@ export default async ({ req, res, log, error }) => {
     // Keep count of number of times notification sent, make sure only send once
     // Cronjob Appwrite function will run every minute
 
-    log("Events within the next hour:", eventsWithinNextHour);
+    log("Events within the next hour:");
+    log(eventsWithinNextHour);
   } catch (error) {
     error("Error checking events within the next hour:", error.message);
   }
