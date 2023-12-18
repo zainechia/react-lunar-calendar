@@ -1,5 +1,5 @@
 import { Query, Client, Databases } from 'node-appwrite';
-import * as OneSignal from '@onesignal/node-onesignal';
+import * as OneSignal from 'node-onesignal';
 
 // Helper function: Check for events happening within the next hour in Appwrite
 const checkEventsWithinNextHour = async (log, database, databaseId, collectionId) => {
@@ -65,7 +65,6 @@ export default async ({ req, res, log, error }) => {
   const database = new Databases(appwriteClient);
 
   // Initialize OneSignal client
-  const OneSignal = require('@onesignal/node-onesignal');
   const configuration = OneSignal.createConfiguration({
     userKey: ONE_SIGNAL_USER_KEY,
     appKey: ONE_SIGNAL_APP_ID,
