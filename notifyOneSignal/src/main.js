@@ -1,8 +1,6 @@
 import { Query, Client, Databases } from 'node-appwrite';
 import * as OneSignal from 'onesignal-node';
 
-// import { checkEventsWithinNextHour } from './helperFunctions';
-
 // Helper function: Check for events happening within the next hour in Appwrite
 const checkEventsWithinNextHour = async (log, database, databaseId, collectionId) => {
   try {
@@ -18,14 +16,33 @@ const checkEventsWithinNextHour = async (log, database, databaseId, collectionId
       Query.lessThanEqual("startTime", nextHour.toISOString()), // Events starting before the next hour
     ];
     // log(OneSignal.Client)
-    log( currentTime.toISOString());
-    log(nextHour.toISOString()+'');
-    log( query);
+    // log( currentTime.toISOString());
+    // log(nextHour.toISOString()+'');
+    // log( query);
 
     const documents = await database.listDocuments(databaseId, collectionId, query);
-   log("documents");
-    log( documents)
+  //  log("documents");
+  //   log( documents)
     return documents;
+  } catch (error) {
+    throw error;
+  }
+};
+
+// Send One Signal notification
+const sendOneSignalNotification = async (oneSignalClient, app, userId, notificationContent) => {
+  try {
+    const notification = new OneSignal.Notification();
+    notification.app_id = app.id;
+    // Name property may be required in some cases, for instance when sending an SMS.
+    notification.name = "test_notification_name";
+    notification.contents = notificationContent;
+
+    // You may want to customize this based on your needs
+    notification.include_player_ids = [userId];
+
+    const result = await oneSignalClient.createNotification(notification);
+    return result;
   } catch (error) {
     throw error;
   }
@@ -45,10 +62,10 @@ export default async ({ req, res, log, error }) => {
   const COLLECTION_ID = "656fd11d07243c7e0ea1";
   const database = new Databases(client);
 
-  log("PROJECT_ID", process.env.APPWRITE_FUNCTION_PROJECT_ID);
-  log("APPWRITE_API_KEY", process.env.APPWRITE_API_KEY);
-  log("DATABASE_ID", DATABASE_ID);
-  log("COLLECTION_ID", COLLECTION_ID);
+  // log("PROJECT_ID", process.env.APPWRITE_FUNCTION_PROJECT_ID);
+  // log("APPWRITE_API_KEY", process.env.APPWRITE_API_KEY);
+  // log("DATABASE_ID", DATABASE_ID);
+  // log("COLLECTION_ID", COLLECTION_ID);
 
   // You can log messages to the console
   log('Hello, Logs!');

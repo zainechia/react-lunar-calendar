@@ -1,0 +1,81 @@
+{
+  "total": 4,
+  "documents": [
+    {
+      "title": "Monday Test 10",
+      "details": "Monday Test 10",
+      "date": "2023-12-17T17:00:00.000+00:00",
+      "startTime": "2023-12-18T05:00:00.000+00:00",
+      "endTime": "2023-12-18T06:00:00.000+00:00",
+      "id": "67de847d-43e2-4a0d-b72d-43073c34291a",
+      "userId": "06b984d8-c136-4587-9b23-444a727047b5",
+      "$id": "67de847d-43e2-4a0d-b72d-43073c34291a",
+      "$createdAt": "2023-12-18T04:04:34.968+00:00",
+      "$updatedAt": "2023-12-18T04:04:34.968+00:00",
+      "$permissions": [
+        "read(\"user:06b984d8-c136-4587-9b23-444a727047b5\")",
+        "update(\"user:06b984d8-c136-4587-9b23-444a727047b5\")",
+        "delete(\"user:06b984d8-c136-4587-9b23-444a727047b5\")"
+      ],
+      "$databaseId": "656fd0d5e096d5c69451",
+      "$collectionId": "656fd11d07243c7e0ea1"
+    },
+    {
+      "title": "Monday Test 11",
+      "details": "Monday Test 11",
+      "date": "2023-12-17T17:00:00.000+00:00",
+      "startTime": "2023-12-18T05:00:00.000+00:00",
+      "endTime": "2023-12-18T15:00:00.000+00:00",
+      "id": "5363d33f-3237-47f6-a9d5-1466640b7f36",
+      "userId": "06b984d8-c136-4587-9b23-444a727047b5",
+      "$id": "5363d33f-3237-47f6-a9d5-1466640b7f36",
+      "$createdAt": "2023-12-18T04:05:45.982+00:00",
+      "$updatedAt": "2023-12-18T04:05:45.982+00:00",
+      "$permissions": [
+        "read(\"user:06b984d8-c136-4587-9b23-444a727047b5\")",
+        "update(\"user:06b984d8-c136-4587-9b23-444a727047b5\")",
+        "delete(\"user:06b984d8-c136-4587-9b23-444a727047b5\")"
+      ],
+      "$databaseId": "656fd0d5e096d5c69451",
+      "$collectionId": "656fd11d07243c7e0ea1"
+    },
+    {
+      "title": "qwerasdf",
+      "details": "qwerasdf",
+      "date": "2023-12-17T17:00:00.000+00:00",
+      "startTime": "2023-12-18T05:00:00.000+00:00",
+      "endTime": "2023-12-18T06:00:00.000+00:00",
+      "id": "92b6f7f9-a202-4334-8c62-1ffc1e783d5a",
+      "userId": "06b984d8-c136-4587-9b23-444a727047b5",
+      "$id": "92b6f7f9-a202-4334-8c62-1ffc1e783d5a",
+      "$createdAt": "2023-12-18T04:09:29.865+00:00",
+      "$updatedAt": "2023-12-18T04:09:29.865+00:00",
+      "$permissions": [
+        "read(\"user:06b984d8-c136-4587-9b23-444a727047b5\")",
+        "update(\"user:06b984d8-c136-4587-9b23-444a727047b5\")",
+        "delete(\"user:06b984d8-c136-4587-9b23-444a727047b5\")"
+      ],
+      "$databaseId": "656fd0d5e096d5c69451",
+      "$collectionId": "656fd11d07243c7e0ea1"
+    },
+    {
+      "title": "qwertyu",
+      "details": "qwertyu",
+      "date": "2023-12-17T17:00:00.000+00:00",
+      "startTime": "2023-12-18T05:00:00.000+00:00",
+      "endTime": "2023-12-18T05:30:00.000+00:00",
+      "id": "7453e8bd-ae64-41da-8fd8-debef879e4ba",
+      "userId": "06b984d8-c136-4587-9b23-444a727047b5",
+      "$id": "7453e8bd-ae64-41da-8fd8-debef879e4ba",
+      "$createdAt": "2023-12-18T04:12:17.328+00:00",
+      "$updatedAt": "2023-12-18T04:12:17.328+00:00",
+      "$permissions": [
+        "read(\"user:06b984d8-c136-4587-9b23-444a727047b5\")",
+        "update(\"user:06b984d8-c136-4587-9b23-444a727047b5\")",
+        "delete(\"user:06b984d8-c136-4587-9b23-444a727047b5\")"
+      ],
+      "$databaseId": "656fd0d5e096d5c69451",
+      "$collectionId": "656fd11d07243c7e0ea1"
+    }
+  ]
+}
