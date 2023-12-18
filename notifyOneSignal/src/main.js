@@ -68,8 +68,12 @@ export default async ({ req, res, log, error }) => {
 
   // OneSignal constants
   const ONE_SIGNAL_APP_ID = "8c92528a-fc7e-4083-b4c9-2b5c21c1b2d8";
+  const ONE_SIGNAL_REST_API_KEY =
+    "ZjJhOWIxNzQtMjE1Zi00ZTYxLTkyZDgtMTZlZDk4MDgxZGRl";
   const ONE_SIGNAL_USER_KEY =
     "YzNhYTIzMjgtMTE3Yy00ZGU3LWJlOWEtZjEwNzEyNjVjNThi";
+  // const ONE_SIGNAL_USER_KEY =
+  // "YzNhYTIzMjgtMTE3Yy00ZGU3LWJlOWEtZjEwNzEyNjVjNThi";
 
   // Initialize Appwrite client and database
   const appwriteClient = new Client()
@@ -81,7 +85,7 @@ export default async ({ req, res, log, error }) => {
   // Initialize OneSignal client
   const configuration = OneSignal.createConfiguration({
     userKey: ONE_SIGNAL_USER_KEY,
-    appKey: ONE_SIGNAL_APP_ID,
+    appKey: ONE_SIGNAL_REST_API_KEY,
   });
   const oneSignalClient = new OneSignal.DefaultApi(configuration);
 
