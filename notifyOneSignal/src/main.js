@@ -1,5 +1,5 @@
 import { Query, Client, Databases } from 'node-appwrite';
-import * as OneSignal from 'onesignal-node';
+import * as OneSignal from '@onesignal/node-onesignal';
 
 // Helper function: Check for events happening within the next hour in Appwrite
 const checkEventsWithinNextHour = async (log, database, databaseId, collectionId) => {
