@@ -23,7 +23,8 @@ const checkEventsWithinNextHour = async (log, database, databaseId, collectionId
     log( query);
 
     const documents = await database.listDocuments(databaseId, collectionId, query);
-    log("documents", documents)
+   log("documents");
+    log( documents)
     return documents;
   } catch (error) {
     throw error;
