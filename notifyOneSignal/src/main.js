@@ -29,7 +29,7 @@ const getEventsWithinNextHour = async (
     const query = [
       Query.greaterThanEqual("startTime", currentTime.toISOString()), // Events starting after the current time
       Query.lessThanEqual("startTime", nextHour.toISOString()), // Events starting before the next hour
-      Query.notEqual("hasNotified", true), // Check for events that haven't been notified
+      // Query.notEqual("hasNotified", true), // Check for events that haven't been notified
     ];
 
     const documents = await database.listDocuments(
