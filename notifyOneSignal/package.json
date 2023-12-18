@@ -8,6 +8,7 @@
     "format": "prettier --write ."
   },
   "dependencies": {
+    "@onesignal/node-onesignal": "^2.0.1-beta2",
     "node-appwrite": "^9.0.0",
     "onesignal-node": "^3.4.0"
   },
