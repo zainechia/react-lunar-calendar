@@ -25,22 +25,24 @@ const checkEventsWithinNextHour = async (log, database, databaseId, collectionId
 };
 
 // Send One Signal notification
-const sendOneSignalNotification = async (oneSignalClient, appId, notificationContent) => {
+const sendOneSignalNotification = async (oneSignalClient, oneSignalAppId, notificationContent) => {
   try {
     const notification = new OneSignal.Notification();
-    notification.app_id = appId;
-    // Name property may be required in some cases, for instance when sending an SMS.
-    notification.name = "test_notification_name";
-    notification.contents = notificationContent;
+    notification.app_id = oneSignalAppId;
 
-    // You may want to customize this based on your needs
-    // notification.include_player_ids = [userId];
+    notification.contents = {
+      en: notificationContent
+    }
+
+    notification.included_segments = ["All"];
 
     log('Sending OneSignal notification...');
     const result = await oneSignalClient.createNotification(notification);
+    log('OneSignal notification sent successfully:', result);
     return result;
   } catch (error) {
-    throw error;
+    error('Error sending OneSignal notification:', error.message);
+    throw(error);
   }
 };
 
@@ -53,7 +55,6 @@ export default async ({ req, res, log, error }) => {
   
   // OneSignal constants
   const ONE_SIGNAL_APP_ID = "8c92528a-fc7e-4083-b4c9-2b5c21c1b2d8";
-  const ONE_SIGNAL_REST_API_KEY = "YzUwNTBkMmUtMDM4YS00M2I5LWI1YzEtMWY1ZjcxOGMwZTAw";
   const ONE_SIGNAL_USER_KEY = "YzNhYTIzMjgtMTE3Yy00ZGU3LWJlOWEtZjEwNzEyNjVjNThi";
 
   // Initialize Appwrite client and database
@@ -71,8 +72,10 @@ export default async ({ req, res, log, error }) => {
   });
   const oneSignalClient = new OneSignal.DefaultApi(configuration);
 
+  // Create notification content
   let notificationContent = "Hello World!";
 
+  // Send notification to all users
   sendOneSignalNotification(oneSignalClient, ONE_SIGNAL_APP_ID, notificationContent);
 
   // You can log messages to the console
@@ -100,17 +103,10 @@ export default async ({ req, res, log, error }) => {
     // Keep count of number of times notification sent, make sure only send once
     // Cronjob Appwrite function will run every minute
 
-
   } catch (error) {
     error("Error checking events within the next hour:", error.message);
+    throw(error);
   }
-
-  // The `req` object contains the request data
-  // if (req.method === 'GET') {
-  //   // Send a response with the res object helpers
-  //   // `res.send()` dispatches a string back to the client
-  //   return res.send('Hello, World!');
-  // }
 
   // `res.json()` is a handy helper for sending JSON
   return res.json({
