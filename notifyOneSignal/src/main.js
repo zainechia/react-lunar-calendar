@@ -46,6 +46,8 @@ export default async ({ req, res, log, error }) => {
 
   log("PROJECT_ID", process.env.APPWRITE_FUNCTION_PROJECT_ID);
   log("APPWRITE_API_KEY", process.env.APPWRITE_API_KEY);
+  log("DATABASE_ID", DATABASE_ID);
+  log("COLLECTION_ID", COLLECTION_ID);
 
   // You can log messages to the console
   log('Hello, Logs!');
