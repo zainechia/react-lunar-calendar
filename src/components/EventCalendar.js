@@ -10,14 +10,7 @@ function EventCalendar({ userId, data, onDataChange }) {
   const { date, changeMonth, daysGrid } = useEventCalendar();
   // const userId = localStorage.getItem("userId");
 
-  function addNewEventHandler(
-    title,
-    content,
-    date,
-    startTime,
-    endTime,
-    hasNotified
-  ) {
+  function addNewEventHandler(title, content, date, startTime, endTime) {
     if (title != "" && content != "") {
       const newDataArray = [...data]; // Create shallow copy of data
 
@@ -29,7 +22,6 @@ function EventCalendar({ userId, data, onDataChange }) {
         startTime,
         endTime,
         userId,
-        hasNotified,
       };
 
       // Create a new document/promise for the new event

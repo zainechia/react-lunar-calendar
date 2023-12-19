@@ -176,7 +176,7 @@ export default async ({ req, res, log, error }) => {
       );
     }
   } catch (err) {
-    error("Error with Appwrite function:", err.message);
+    error("Error with Appwrite/OneSignal function:", err.message);
     throw err;
   }
 
