@@ -48,7 +48,7 @@ function EventCalendar({ userId, data, onDataChange }) {
           // updated array of events. This callback will notify the parent 'App'
           // component that the data has changed, and set data accordingly.
           onDataChange?.(newDataArray);
-          // console.log(response);
+          console.log(response);
         },
         function (error) {
           console.log(error);

@@ -160,7 +160,7 @@ export default async ({ req, res, log, error }) => {
       log(`Processing event for userId: ${userId}`);
 
       // Customize notification content based on specific event details if needed
-      const notificationContent = `Event: ${event.title} is starting in an hour!`;
+      const notificationContent = `Event: ${event.title} is starting within an hour!`;
 
       // Send OneSignal notification to the specific user
       await sendOneSignalNotification(
