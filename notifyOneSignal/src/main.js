@@ -25,7 +25,7 @@ const getEventsWithinNextHour = async (
     // Calculate the time one hour from now
     const nextHour = new Date(currentTime.getTime() + 60 * 60 * 1000);
 
-    // Query for events starting within the next hour
+    // Query for events starting within the next hour and has not been notified yet
     const query = [
       Query.greaterThanEqual("startTime", currentTime.toISOString()), // Events starting after the current time
       Query.lessThanEqual("startTime", nextHour.toISOString()), // Events starting before the next hour
@@ -155,6 +155,7 @@ export default async ({ req, res, log, error }) => {
 
     // Iterate over each event
     for (const event of eventsWithinNextHour.documents) {
+      log(`The event being iterated: ${event}`);
       const userId = event.userId;
       log(`Processing event for userId: ${userId}`);
 
