@@ -47,7 +47,7 @@ function NewEventDialog({ addNewEvent, dayInfo, onClose, ...rest }) {
       return;
     }
 
-    addNewEvent(title, content, dayInfo.date, startTime, endTime, hasNotified);
+    addNewEvent(title, content, dayInfo.date, startTime, endTime);
 
     onClose({}, "Some Reason");
 
