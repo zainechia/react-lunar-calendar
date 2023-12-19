@@ -38,8 +38,8 @@ const getEventsWithinNextHour = async (
       query
     );
 
-    log("Events within the next hour:");
-    log(documents);
+    // log("Events within the next hour:");
+    // log(documents);
 
     return documents;
   } catch (err) {
@@ -152,6 +152,9 @@ export default async ({ req, res, log, error }) => {
       DATABASE_ID,
       COLLECTION_ID
     );
+
+    log("Events within the next hour:");
+    log(eventsWithinNextHour);
 
     // Iterate over each event
     for (const event of eventsWithinNextHour.documents) {
