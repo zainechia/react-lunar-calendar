@@ -158,7 +158,9 @@ export default async ({ req, res, log, error }) => {
 
     // Iterate over each event
     for (const event of eventsWithinNextHour.documents) {
-      log(`The event being iterated: ${event}`);
+      log(
+        `The event being iterated: title = ${event.title} event_id = ${event.$id}`
+      );
       const userId = event.userId;
       log(`Processing event for userId: ${userId}`);
 
