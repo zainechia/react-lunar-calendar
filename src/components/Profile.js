@@ -35,6 +35,7 @@ function Profile() {
   const handleLogout = async () => {
     try {
       await account.deleteSession("current");
+      localStorage.removeItem("session", session.$id);
       navigate("/");
     } catch (error) {
       setError(error.message); // Failure: Set the error message in the state
